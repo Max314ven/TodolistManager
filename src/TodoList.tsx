@@ -37,7 +37,6 @@ export function TodoList(props: TodoListType) {
         }
     }
 
-
     return (
         <div className={s.todolist_container}>
             <div className={s.todolist_container__header}>
