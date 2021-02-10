@@ -13,7 +13,6 @@ export function TodoList() {
                     <button>+</button>
                 </div>
             </div>
-
             <div className={s.todolist_container__list}>
                 <ul>
                     <li>
