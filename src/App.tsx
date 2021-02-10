@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import s from "./App.module.css";
 import {TodoList} from "./TodoList";
+import {v1} from "uuid";
 
 type TodoListType = {
     title: string
 }
 
 export type TasksArrType = {
-    id: number,
+    id: string,
     title: string,
     isDone: boolean
 }[]
@@ -19,22 +20,22 @@ function App() {
 
     let [tasksArr, setTasksArr] = useState(
         [{
-            id: 1,
+            id: v1(),
             title: "Learn JS",
             isDone: true
         },
             {
-                id: 2,
+                id: v1(),
                 title: "Learn React",
                 isDone: true
             },
             {
-                id: 3,
+                id: v1(),
                 title: "Code practice",
                 isDone: false
             },
             {
-                id: 4,
+                id: v1(),
                 title: "Learn English",
                 isDone: false
             }
@@ -55,18 +56,25 @@ function App() {
         setActiveFilter(value)
     }
 
-    function removeTask (taskID:number){
+    function removeTask (taskID:string){
         let filteredTask= tasksArr.filter(t=> t.id !==taskID)
         setTasksArr(filteredTask)
     }
 
+    function addTask (title:string){
+        let newTask = {id:v1(), title: title, isDone:true}
+        let newTasksArr = [newTask, ...tasksArr]
+        setTasksArr(newTasksArr)
+    }
 
     return (
         <div className={s.app_container}>
             <TodoList title={todoList.title}
                       tasksArr={tasksForTodoList}
                       removeTask={removeTask}
+                      addTask={addTask}
                       changeActiveFilter={changeActiveFilter}
+
             />
         </div>
 
