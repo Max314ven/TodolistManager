@@ -1,3 +1,13 @@
+.error {
+    border: red 1px solid;
+}
+
+.errorMessage {
+    color: red;
+    text-align: left;
+    font-size: 1rem;
+}
+
 .todolist_container {
     background: #ffffff;
     color: #497081;
@@ -104,13 +114,23 @@
     justify-content: space-between;
     height: 1.6rem;
 }
-.todolist_container__filters button{
+.todolist_container__filters_button{
     width: 30%;
     font-size: 1rem;
     border: solid 1px #497081;
     border-radius: 3px;
     background-color: #ffffff;
     color: #497081;
+    outline: none;
+
+}
+.todolist_container__filters_active_button{
+    width: 30%;
+    font-size: 1rem;
+    border: solid 1px #497081;
+    border-radius: 3px;
+    background-color: #497081;
+    color: #ffffff;
     outline: none;
 
 }

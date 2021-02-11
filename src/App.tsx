@@ -67,6 +67,15 @@ function App() {
         setTasksArr(newTasksArr)
     }
 
+    function changeStatus (id:string, isDone:boolean ){
+        let task = tasksArr.find(t=>t.id===id)
+        if(task){
+            task.isDone = isDone
+            setTasksArr([...tasksArr])
+        }
+
+    }
+
     return (
         <div className={s.app_container}>
             <TodoList title={todoList.title}
@@ -74,6 +83,8 @@ function App() {
                       removeTask={removeTask}
                       addTask={addTask}
                       changeActiveFilter={changeActiveFilter}
+                      changeCheckboxStatus={changeStatus}
+                      filter={activeFilter}
 
             />
         </div>
