@@ -2,6 +2,7 @@ import React, {ChangeEvent} from "react";
 import s from "./Todolist.module.css"
 import {filterValueType, TasksArrType} from "./App";
 import {AddItemForm} from "./AddItemForm";
+import {EditableSpan} from "./EditableSpan";
 
 type TodoListType = {
     id: string
@@ -11,6 +12,7 @@ type TodoListType = {
     addTask: (title: string, todoListID: string) => void
     changeActiveFilter: (value: filterValueType, todoListID: string) => void
     changeCheckboxStatus: (id: string, isDone: boolean, todoListID: string) => void
+    changeTaskTitle:(id: string, newValue: string, todoListID: string) => void
     filter: filterValueType
     deleteTodoList: (todoListID: string) => void
 }
@@ -48,14 +50,17 @@ export function TodoList(props: TodoListType) {
                     {
                         props.tasksArr.map(task => {
                             const removeTask = () => props.removeTask(task.id, props.id)
-                            const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+                            const onChangeTaskTitleHandler = (newValue:string) => {
+                                props.changeTaskTitle(task.id, newValue, props.id)
+                            }
+                            const onChangeStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
                                 let newIsDoneValue = e.currentTarget.checked
                                 props.changeCheckboxStatus(task.id, newIsDoneValue, props.id)
                             }
                             return (
                                 <li key={task.id}>
-                                    <input type="checkbox" checked={task.isDone} onChange={onChangeHandler}/>
-                                    <span>{task.title}</span>
+                                    <input type="checkbox" checked={task.isDone} onChange={onChangeStatusHandler}/>
+                                    <EditableSpan title={task.title} onChange={onChangeTaskTitleHandler} />
                                     <button onClick={removeTask}>🗙</button>
                                 </li>
                             )

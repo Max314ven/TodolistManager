@@ -27,8 +27,8 @@ function App() {
 
 
     let [todoListArr, setTodoLists] = useState<Array<TodoListType>>([
-        {id: todoListID1, title: "What to learn", filter: "Active"},
-        {id: todoListID2, title: "What to bye", filter: "Done"},
+        {id: todoListID1, title: "What to learn", filter: "All"},
+        {id: todoListID2, title: "What to bye", filter: "All"},
     ])
 
     function deleteTodoList(todoListID: string) {
@@ -81,6 +81,14 @@ function App() {
         }
 
     }
+    function  changeTaskTitle(id:string, newValue:string, todoListID:string){
+        let tasks = tasksArr[todoListID]
+        let task = tasks.find(t => t.id === id)
+        if (task) {
+            task.title = newValue
+            setTasksArr({...tasksArr})
+        }
+    }
 
     function addTodolist(title: string) {
         let newtodoList: TodoListType = {
@@ -117,6 +125,7 @@ function App() {
                         addTask={addTask}
                         changeActiveFilter={changeActiveFilter}
                         changeCheckboxStatus={changeStatus}
+                        changeTaskTitle={changeTaskTitle}
                         filter={tl.filter}
                         deleteTodoList={deleteTodoList}
 
