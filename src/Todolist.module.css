@@ -68,25 +68,6 @@
     word-wrap: break-word;
 
 }
-
-.todolist_container__list button {
-    width: 15%;
-    height: 1.6rem;
-    border: solid 1px #497081;
-    border-radius: 3px;
-    background-color: #ffffff;
-    font-size: 0.7rem;
-    font-weight: bold;
-    color: #497081;
-    outline: none;
-}
-
-.todolist_container__list button:hover {
-    background-color: #497081;
-    color: #ffffff;
-
-}
-
 .todolist_container__filters{
     margin-top: 20px;
     display: flex;

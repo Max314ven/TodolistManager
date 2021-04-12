@@ -4,9 +4,9 @@ import {TodoList} from "./TodoList";
 import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
 
-export type filterValueType = "All" | "Active" | "Done"
+export type filterValueType = "all" | "active" | "done"
 
-type TodoListType = {
+ export type TodoListType = {
     id: string
     title: string
     filter: filterValueType
@@ -27,8 +27,8 @@ function App() {
 
 
     let [todoListArr, setTodoLists] = useState<Array<TodoListType>>([
-        {id: todoListID1, title: "What to learn", filter: "All"},
-        {id: todoListID2, title: "What to bye", filter: "All"},
+        {id: todoListID1, title: "What to learn", filter: "all"},
+        {id: todoListID2, title: "What to bye", filter: "all"},
     ])
 
     function deleteTodoList(todoListID: string) {
@@ -89,12 +89,21 @@ function App() {
             setTasksArr({...tasksArr})
         }
     }
+    function changeTodolistTitle(newValue:string, todoListID:string){
+        let todoListWithNewTitle = todoListArr.find(tl=>tl.id===todoListID)
+        if(todoListWithNewTitle){
+            todoListWithNewTitle.title=newValue
+            setTodoLists([...todoListArr])
+        }
+
+
+    }
 
     function addTodolist(title: string) {
         let newtodoList: TodoListType = {
             id: v1(),
             title: title,
-            filter: "All"
+            filter: "all"
         }
         setTodoLists([newtodoList, ...todoListArr])
         setTasksArr({...tasksArr, [newtodoList.id]: []})
@@ -108,10 +117,10 @@ function App() {
 
                 let tasksForTodoList = tasksArr[tl.id]
 
-                if (tl.filter === "Active") {
+                if (tl.filter === "active") {
                     tasksForTodoList = tasksArr[tl.id].filter(task => !task.isDone)
                 }
-                if (tl.filter === "Done") {
+                if (tl.filter === "done") {
                     tasksForTodoList = tasksArr[tl.id].filter(task => task.isDone)
                 }
 
@@ -126,6 +135,7 @@ function App() {
                         changeActiveFilter={changeActiveFilter}
                         changeCheckboxStatus={changeStatus}
                         changeTaskTitle={changeTaskTitle}
+                        changeTodolistTitle={changeTodolistTitle}
                         filter={tl.filter}
                         deleteTodoList={deleteTodoList}
 
